@@ -1,0 +1,13 @@
+{
+    "name" : "appszoom/adodb-multiple-mysql",
+    "version" : "V5.18-2012-09-03",
+    
+    "require" : {
+        "php" : ">=5.3.2"
+    },
+
+    "autoload" : {
+        "files" : ["adodb.inc.php"]
+    }
+
+}
