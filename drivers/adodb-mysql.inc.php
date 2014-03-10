@@ -40,6 +40,7 @@ class ADODB_mysql extends ADOConnection {
 	var $substr = "substring";
 	var $nameQuote = '`';		/// string to use to quote identifiers and names
 	var $compat323 = false; 		// true if compat with mysql 3.23
+	var $__db = array();
 	
 	function ADODB_mysql() 
 	{			
@@ -553,6 +554,7 @@ class ADODB_mysql extends ADOConnection {
 	}
 		
 	// returns true or false
+	/*
 	function SelectDB($dbName) 
 	{
 		$this->database = $dbName;
@@ -562,6 +564,17 @@ class ADODB_mysql extends ADOConnection {
 		}
 		else return false;	
 	}
+	*/
+    function SelectDB($dbName)
+    {
+        $this->databaseName = $dbName;
+        if ($this->_connectionID) {
+            @mysql_select_db($dbName,$this->_connectionID);
+            $this->__db[$this->_connectionID] = $dbName;
+            return $this->_connectionID;
+        }
+        else return false;
+    }
 	
 	// parameters use PostgreSQL convention, not MySQL
 	function SelectLimit($sql,$nrows=-1,$offset=-1,$inputarr=false,$secs=0)
@@ -582,6 +595,7 @@ class ADODB_mysql extends ADOConnection {
 	{
 	//global $ADODB_COUNTRECS;
 		//if($ADODB_COUNTRECS) 
+        $this->SelectDB($this->__db[$this->_connectionID]);
 		return mysql_query($sql,$this->_connectionID);
 		//else return @mysql_unbuffered_query($sql,$this->_connectionID); // requires PHP >= 4.0.6
 	}
