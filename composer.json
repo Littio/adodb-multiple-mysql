@@ -3,6 +3,15 @@
     
     "version" : "V5.18-2012-09-03",
     
+    "authors" : [
+        {
+            "name": "John Lim",
+            "homepage": "http://adodb.sourceforge.net/#docs"
+        }
+    ],
+
+    "support" : { "forum" : "http://phplens.com/lens/lensforum/topics.php?id=4" },
+    
     "require" : {
         "php" : ">=5.3.2"
     },
